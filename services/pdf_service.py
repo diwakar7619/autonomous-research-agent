@@ -54,6 +54,18 @@ def generate_pdf(query: str, summary: dict) -> str:
         pdf.set_font("Helvetica", "", 11)
         for item in items:
             item_str = str(item).strip()
+            item_str = (
+                item_str.replace("’", "'")
+                .replace("‘", "'")
+                .replace(
+                    """, '"')
+            .replace(""",
+                    '"',
+                )
+                .replace("—", "-")
+                .replace("–", "-")
+                .replace("…", "...")
+            )
             if not item_str:
                 continue
 

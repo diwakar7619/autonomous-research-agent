@@ -1,6 +1,15 @@
 """
-Autonomous Research Agent
-Version 1
+test_app.py
+
+End-to-end integration test using mock data.
+
+Purpose:
+- Verify PDF generation
+- Verify Markdown generation
+- Verify SQLite storage
+- Verify Streamlit rendering
+
+No external APIs are called.
 """
 
 import streamlit as st
@@ -85,10 +94,15 @@ if st.button("🔍 Research"):
 
     with st.spinner("Searching the web and generating AI insights..."):
         try:
-            search_results = search_web(query)
+            search_results = []
             search_results = clean_results(search_results)
 
-            summary = summarize_results(search_results)
+            summary = {
+                "key_points": ["Point 1", "Point 2"],
+                "important_findings": ["Finding 1"],
+                "actionable_insights": ["Insight 1"],
+                "sources": ["https://example.com"],
+            }
 
             # Save the successful search to SQLite Database BEFORE PDF generation (Fault Tolerance)
             save_search(query, summary)
